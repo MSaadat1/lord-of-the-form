@@ -25,8 +25,6 @@ export const ProfileInformation = ({ userData }) => {
   }
   // eslint-disable-next-line no-unused-vars
   const { emailAddress, firstName, lastName, phoneInput, cityNames } = userData;
-  console.log()
-  //  const formatPhone = formatPhoneNumber(phoneInput)
 
   return (
     <>

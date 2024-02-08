@@ -21,10 +21,7 @@ export class ClassForm extends Component {
     emailAddress: "",
     cityNames: "",
     phoneInput: ["", "", "", ""],
-    isNameValid: false,
-    emailValidation: false,
-    cityValidation: false,
-    phoneValidation: false,
+    inputValidation: false,
   };
 
   handleSubmit = (e) => {
@@ -34,14 +31,10 @@ export class ClassForm extends Component {
       lastName,
       emailAddress,
       cityNames,
-      isNameValid,
-      emailValidation,
-      cityValidation,
       phoneInput,
-      phoneValidation,
+      inputValidation,
     } = this.state;
-    const isValid =
-      isNameValid && emailValidation && cityValidation && phoneValidation;
+    const isValid = inputValidation;
 
     this.props.onSubmit(
       {
@@ -49,16 +42,13 @@ export class ClassForm extends Component {
         lastName,
         emailAddress,
         cityNames,
-        phoneInput,
+        phoneInput: formatPhoneNumber(phoneInput),
       },
       isValid
     );
 
     this.setState({
-      isNameValid: true,
-      emailValidation: true,
-      cityValidation: true,
-      phoneValidation: true,
+      inputValidation: true,
     });
   };
 
@@ -68,13 +58,9 @@ export class ClassForm extends Component {
       lastName,
       emailAddress,
       cityNames,
-      isNameValid,
-      emailValidation,
-      cityValidation,
       phoneInput,
-      phoneValidation,
+      inputValidation,
     } = this.state;
-
 
     const firstNameValid = isNameValidation(firstName);
     const lastNameValid = isNameValidation(lastName);
@@ -82,16 +68,14 @@ export class ClassForm extends Component {
     const cityValid = isCityValid(cityNames);
     const phoneValid = formatPhoneNumber(phoneInput);
 
-    const showFirstName = isNameValid && !firstNameValid;
-    const showLastName = isNameValid && !lastNameValid;
-    const showEmail = emailValidation && !emailValid;
-    const showCity = cityValidation && !cityValid;
-    const showPhone = phoneValidation && !phoneValid;
+    const showFirstName = inputValidation && !firstNameValid;
+    const showLastName = inputValidation && !lastNameValid;
+    const showEmail = inputValidation && !emailValid;
+    const showCity = inputValidation && !cityValid;
+    const showPhone = inputValidation && !phoneValid;
 
     return (
-      <form
-        onSubmit={this.handleSubmit}
-      >
+      <form onSubmit={this.handleSubmit}>
         <u>
           <h3>User Information Form</h3>
         </u>
@@ -163,12 +147,12 @@ export class ClassForm extends Component {
         {showCity && <ErrorMessage message={cityErrorMessage} show={true} />}
 
         <div>
-          <ClassPhoneInput phoneInput={phoneInput} />
+          <ClassPhoneInput phoneInput={this.state.phoneInput}  />
         </div>
 
-        {showPhone && (
+        {showPhone && 
           <ErrorMessage message={phoneNumberErrorMessage} show={true} />
-        )}
+        }
 
         <input type="submit" value="Submit" />
       </form>

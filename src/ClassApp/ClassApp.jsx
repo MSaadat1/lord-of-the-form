@@ -12,11 +12,10 @@ import { ProfileInformation } from "../ProfileInformation";
 
 export class ClassApp extends Component {
   state = {
-   userData : null,
-  }
-  handleSubmitApp = (formData, isValid)=> {
+    userData: null,
+  };
+  handleSubmitApp = (formData, isValid) => {
     if (isValid) {
-      // Update the state based on the previous state
       this.setState((prevState) => ({
         userData: { ...prevState.userData, ...formData },
       }));
@@ -24,7 +23,7 @@ export class ClassApp extends Component {
     } else {
       alert("Correct the input and try again!");
     }
-   }
+  };
   render() {
     return (
       <>
@@ -37,7 +36,7 @@ export class ClassApp extends Component {
             this.state.userData
           }
         />
-        <ClassForm onSubmit={this.handleSubmitApp}/>
+        <ClassForm onSubmit={this.handleSubmitApp} />
       </>
     );
   }

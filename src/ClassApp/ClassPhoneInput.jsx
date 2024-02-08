@@ -7,6 +7,7 @@ export default class ClassPhoneInput extends Component {
 
     this.state = {
       phoneInputs: props.phoneInput,
+
       refs: [
         React.createRef(),
         React.createRef(),
@@ -43,6 +44,7 @@ export default class ClassPhoneInput extends Component {
   };
   render() {
     const { phoneInputs } = this.state;
+
     return (
       <div className="input-wrap">
         <label htmlFor="phone">Phone:</label>
