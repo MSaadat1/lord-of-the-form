@@ -41,6 +41,7 @@ export default class ClassPhoneInput extends Component {
     }
 
     this.setState({ phoneInputs: newState });
+    this.props.handleChangePhone(newState);
   };
   render() {
     const { phoneInputs } = this.state;

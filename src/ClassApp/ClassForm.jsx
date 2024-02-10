@@ -24,6 +24,23 @@ export class ClassForm extends Component {
     inputValidation: false,
   };
 
+  reset = () => {
+    this.setState({
+      firstName: "",
+      lastName: "",
+      emailAddress: "",
+      cityNames: "",
+      phoneInput: ["", "", "", ""],
+    });
+  };
+
+  handleChangePhoneInput = (input) => {
+    this.setState({
+      ...this.state,
+      phoneInput: input,
+    });
+  };
+
   handleSubmit = (e) => {
     e.preventDefault();
     const {
@@ -50,6 +67,7 @@ export class ClassForm extends Component {
     this.setState({
       inputValidation: true,
     });
+    this.reset();
   };
 
   render() {
@@ -147,12 +165,15 @@ export class ClassForm extends Component {
         {showCity && <ErrorMessage message={cityErrorMessage} show={true} />}
 
         <div>
-          <ClassPhoneInput phoneInput={this.state.phoneInput}  />
+          <ClassPhoneInput
+            phoneInput={this.state.phoneInput}
+            handleChangePhone={this.handleChangePhoneInput}
+          />
         </div>
 
-        {showPhone && 
+        {showPhone && (
           <ErrorMessage message={phoneNumberErrorMessage} show={true} />
-        }
+        )}
 
         <input type="submit" value="Submit" />
       </form>

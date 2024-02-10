@@ -47,7 +47,7 @@ export const FunctionalForm = ({ onSubmit }) => {
       isValid
     );
 
-    setInputValidation(false);
+    setInputValidation(true);
     reset();
   };
 
@@ -83,9 +83,9 @@ export const FunctionalForm = ({ onSubmit }) => {
         />
       </div>
 
-      {
-        <ErrorMessage message={firstNameErrorMessage} show={showFirstName} />
-      }
+      {showFirstName && (
+        <ErrorMessage message={firstNameErrorMessage} show={true} />
+      )}
 
       {/* last name input */}
       <div>
@@ -101,7 +101,9 @@ export const FunctionalForm = ({ onSubmit }) => {
         />
       </div>
 
-      {<ErrorMessage message={lastNameErrorMessage} show={showLastName} />}
+      {showLastName && (
+        <ErrorMessage message={lastNameErrorMessage} show={true} />
+      )}
 
       {/* Email Input */}
       <div>
@@ -117,7 +119,7 @@ export const FunctionalForm = ({ onSubmit }) => {
         />
       </div>
 
-      {<ErrorMessage message={emailErrorMessage} show={showEmail} />}
+      {showEmail && <ErrorMessage message={emailErrorMessage} show={true} />}
 
       {/* City Input */}
       <div>
@@ -138,15 +140,13 @@ export const FunctionalForm = ({ onSubmit }) => {
           ))}
         </datalist>
       </div>
-
-      {<ErrorMessage message={cityErrorMessage} show={showCity} />}
-
+      {showCity && <ErrorMessage message={cityErrorMessage} show={true} />}
       <div>
         <PhoneInput updateHandler={setPhoneInput} phoneInput={phoneInput} />
       </div>
-      {
-        <ErrorMessage message={phoneNumberErrorMessage} show={showPhone} />
-      }
+      {showPhone && (
+        <ErrorMessage message={phoneNumberErrorMessage} show={true} />
+      )}
 
       <input type="submit" value="Submit" />
     </form>
