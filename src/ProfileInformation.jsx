@@ -1,5 +1,3 @@
-// import { formatPhoneNumber } from "./utils/transformations";
-
 export const InfoRow = ({ label, value }) => {
   return (
     <div>
@@ -23,7 +21,7 @@ export const ProfileInformation = ({ userData }) => {
       </>
     );
   }
-  // eslint-disable-next-line no-unused-vars
+
   const { emailAddress, firstName, lastName, phoneInput, cityNames } = userData;
 
   return (

@@ -33,6 +33,7 @@ export const FunctionalForm = ({ onSubmit }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    setInputValidation(true);
     const isValid =
       firstNameValid && lastNameValid && emailValid && cityValid && phoneValid;
 
@@ -46,9 +47,10 @@ export const FunctionalForm = ({ onSubmit }) => {
       },
       isValid
     );
-
-    setInputValidation(true);
-    reset();
+    if (isValid) {
+      setInputValidation(false);
+      reset();
+    }
   };
 
   const firstNameValid = isNameValidation(firstName);

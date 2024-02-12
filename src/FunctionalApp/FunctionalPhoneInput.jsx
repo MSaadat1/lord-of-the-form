@@ -1,6 +1,6 @@
 import { useRef } from "react";
 
-export default function PhoneInput({ updateHandler , phoneInput}) {
+export default function PhoneInput({ updateHandler, phoneInput }) {
   const refs = [useRef(), useRef(), useRef(), useRef()];
   const ref0 = refs[0];
   const ref1 = refs[1];
@@ -29,7 +29,7 @@ export default function PhoneInput({ updateHandler , phoneInput}) {
     if (shouldGoToPrevRef && prevRef?.current) {
       prevRef.current.focus();
     }
-   
+
     updateHandler(newState);
   };
 

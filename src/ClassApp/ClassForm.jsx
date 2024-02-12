@@ -7,6 +7,7 @@ import { isCityValid } from "../utils/validations";
 import { allCities } from "../utils/all-cities";
 import { formatPhoneNumber } from "../utils/transformations";
 import ClassPhoneInput from "./ClassPhoneInput";
+import { ClassTextIput } from "./ClassTextInputs";
 
 const firstNameErrorMessage = "First name must be at least 2 characters long";
 const lastNameErrorMessage = "Last name must be at least 2 characters long";
@@ -43,6 +44,9 @@ export class ClassForm extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
+    this.setState({
+      inputValidation: true,
+    });
     const {
       firstName,
       lastName,
@@ -63,11 +67,12 @@ export class ClassForm extends Component {
       },
       isValid
     );
-
-    this.setState({
-      inputValidation: true,
-    });
-    this.reset();
+    if (isValid) {
+      this.setState({
+        inputValidation: false,
+      });
+      this.reset();
+    }
   };
 
   render() {
@@ -100,14 +105,15 @@ export class ClassForm extends Component {
 
         {/* first name input */}
         <div className="input-wrap">
-          <label>{"First Name"}:</label>
-          <input
-            placeholder="Bilbo"
-            type="text"
-            value={firstName}
-            onChange={(e) => {
-              this.setState({ firstName: e.target.value });
+          <ClassTextIput
+            inputProps={{
+              placeholder: "Bilbo",
+              value: firstName,
+              onChange: (e) => {
+                this.setState({ firstName: e.target.value });
+              },
             }}
+            label={"First Name"}
           />
         </div>
         {showFirstName && (
@@ -116,14 +122,15 @@ export class ClassForm extends Component {
 
         {/* last name input */}
         <div className="input-wrap">
-          <label>{"Last Name"}:</label>
-          <input
-            placeholder="Baggins"
-            type="text"
-            value={lastName}
-            onChange={(e) => {
-              this.setState({ lastName: e.target.value });
+          <ClassTextIput
+            inputProps={{
+              placeholder: "Baggins",
+              value: firstName,
+              onChange: (e) => {
+                this.setState({ lastName: e.target.value });
+              },
             }}
+            label={"Last Name"}
           />
         </div>
         {showLastName && (
@@ -132,29 +139,31 @@ export class ClassForm extends Component {
 
         {/* Email Input */}
         <div className="input-wrap">
-          <label>{"Email"}:</label>
-          <input
-            placeholder="bilbo-baggins@adventurehobbits.net"
-            type="text"
-            value={emailAddress}
-            onChange={(e) => {
-              this.setState({ emailAddress: e.target.value });
+          <ClassTextIput
+            inputProps={{
+              placeholder: "bilbo-baggins@adventurehobbits.net",
+              value: emailAddress,
+              onChange: (e) => {
+                this.setState({ emailAddress: e.target.value });
+              },
             }}
+            label={"Email"}
           />
         </div>
         {showEmail && <ErrorMessage message={emailErrorMessage} show={true} />}
 
         {/* City Input */}
         <div className="input-wrap">
-          <label>{"City"}:</label>
-          <input
-            placeholder="Hobbiton"
-            type="text"
-            value={cityNames}
-            onChange={(e) => {
-              this.setState({ cityNames: e.target.value });
+          <ClassTextIput
+            inputProps={{
+              list: "cityList",
+              placeholder: "Hobbiton",
+              value: cityNames,
+              onChange: (e) => {
+                this.setState({ cityNames: e.target.value });
+              },
             }}
-            list="cityList"
+            label={"City"}
           />
           <datalist id="cityList">
             {allCities.map((city, index) => (
